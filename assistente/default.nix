@@ -20,6 +20,17 @@ let
       wlrctl       # puntatore virtuale (clicca, scorri)
       wl-clipboard # appunti
     ])}:$PATH
+    # Avviato fuori dalla sessione grafica (es. Claude Code da `sudo su`): trova da solo
+    # l'istanza di Hyprland attiva dell'utente e il suo display Wayland
+    if [ -z "''${HYPRLAND_INSTANCE_SIGNATURE:-}" ]; then
+      export XDG_RUNTIME_DIR=''${XDG_RUNTIME_DIR:-/run/user/$(id -u voodoo)}
+      [ -d "$XDG_RUNTIME_DIR/hypr" ] || export XDG_RUNTIME_DIR=/run/user/$(id -u voodoo)
+      istanza=$(hyprctl instances -j 2>/dev/null | ${pkgs.jq}/bin/jq -c 'sort_by(.time) | last // empty')
+      if [ -n "$istanza" ]; then
+        export HYPRLAND_INSTANCE_SIGNATURE=$(${pkgs.jq}/bin/jq -r .instance <<< "$istanza")
+        export WAYLAND_DISPLAY=''${WAYLAND_DISPLAY:-$(${pkgs.jq}/bin/jq -r .wl_socket <<< "$istanza")}
+      fi
+    fi
     exec ${pythonMcp}/bin/python3 ${./hyprland-mcp.py} "$@"
   '';
 
