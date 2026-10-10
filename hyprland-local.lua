@@ -90,3 +90,6 @@ hl.config({
         inactive_opacity = 0.95,
     },
 })
+
+-- SUPER+I: pannello dell'assistente Claude (chat + azioni sul desktop tramite MCP)
+hl.bind("SUPER + I", hl.dsp.exec_cmd("assistente-toggle"))
