@@ -20,6 +20,9 @@ in
   fonts.packages = [ googleSans ];
 
   environment.systemPackages = [ pkgs.google-cursor cursorePredefinito ];
+  # Testo delle app GTK un 10% più grande (si somma alla scala dello schermo 1.067)
+  home-manager.users.voodoo.dconf.settings."org/gnome/desktop/interface".text-scaling-factor = 1.1;
+
   environment.variables = {
     XCURSOR_THEME = cursore;
     XCURSOR_SIZE = "24";

@@ -93,3 +93,8 @@ hl.config({
 
 -- SUPER+I: pannello dell'assistente Claude (chat + azioni sul desktop tramite MCP)
 hl.bind("SUPER + I", hl.dsp.exec_cmd("assistente-toggle"))
+
+-- Scala dello schermo: 1.0666667 (= 128/120). Con 3440x1440 è l'unico valore tra 1 e 1.25 che
+-- Hyprland accetta (la scala deve essere un multiplo di 1/120 e dividere la risoluzione in interi).
+-- Per ingrandire ancora un po' senza saltare a 1.25 si alzano i testi (vedi aspetto.nix, terminale.nix).
+hl.monitor({ output = "HDMI-A-1", mode = "3440x1440@84.96", position = "0x0", scale = 1.0666667 })

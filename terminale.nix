@@ -8,7 +8,7 @@
     enable = true;
     settings = {
       font_family = "JetBrainsMono Nerd Font";
-      font_size = 12;
+      font_size = 13;
 
       background_opacity = "0.85";    # trasparenza dello sfondo (1.0 = opaco); il testo resta pieno
       background_blur = 0;             # la sfocatura la fa già Hyprland
