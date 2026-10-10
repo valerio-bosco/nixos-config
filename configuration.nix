@@ -17,6 +17,7 @@
       ./avvio.nix          # animazione di avvio (Plymouth) + login di serpantinum (SDDM)
       ./aspetto.nix        # font Google Sans (e cursore)
       ./assistente         # assistente Claude nel desktop (SUPER+I) + server MCP per Hyprland
+      ./remoto.nix         # accesso da remoto: Tailscale
     ];
 
   # Use the systemd-boot EFI boot loader.
