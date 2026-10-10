@@ -7,9 +7,23 @@
 let
   # Tema di login "Material You" incluso in serpantinum (il suo installatore per Arch lo configura,
   # il modulo NixOS no: per questo prima si vedeva il login standard GDM)
-  temaLogin = pkgs.runCommand "sddm-tema-material-you" { } ''
+  # La schermata di login viene disegnata SENZA scheda video (QT_QUICK_BACKEND=software, sotto):
+  # dopo un riavvio da Windows la GPU NVIDIA può dare errore al primo uso (NVRM Xid 32,
+  # "QRhiGles2: Context is lost") e il login andava in crash lasciando lo schermo nero.
+  # Senza GPU l'effetto ColorOverlay del tema non funziona e le icone sparivano: qui il colore viene
+  # scritto direttamente nelle icone SVG, che diventano visibili, e gli overlay vengono spenti.
+  temaLogin = pkgs.runCommand "sddm-tema-material-you" { nativeBuildInputs = [ pkgs.perl ]; } ''
     mkdir -p $out/share/sddm/themes
     cp -r ${inputs.serpantinum}/config/sddm/themes/material-you $out/share/sddm/themes/
+    chmod -R u+w $out
+    f=$out/share/sddm/themes/material-you/Main.qml
+    # lucchetto: grigio-verde; le altre icone: verde scuro (gli stessi colori degli overlay originali)
+    perl -pi -e "s/stroke='black'(?=.*<rect x='3' y='11')/stroke='%238ca090'/g" $f
+    perl -pi -e "s/stroke='black'/stroke='%230F3C2C'/g" $f
+    perl -0pi -e 's/visible: false/visible: true/g; s/ColorOverlay \{/ColorOverlay {\n                                visible: false/g' $f
+    # controlli: nessuna icona nera rimasta, 5 overlay spenti
+    ! grep -q "stroke='black'" $f
+    test "$(grep -c 'ColorOverlay {' $f)" = 5
   '';
 
   # Animazione di avvio: https://github.com/adi1090x/plymouth-themes (si scarica solo quella scelta)
@@ -26,7 +40,7 @@ in
     # stesso cursore di Hyprland
     settings.Theme = { CursorTheme = "GoogleDot-Black"; CursorSize = 24; };
     # su NixOS i cursori non stanno in /usr/share/icons: va detto alla schermata di login dove cercarli
-    settings.General.GreeterEnvironment = "XCURSOR_PATH=/run/current-system/sw/share/icons,XCURSOR_THEME=GoogleDot-Black,XCURSOR_SIZE=24";
+    settings.General.GreeterEnvironment = "XCURSOR_PATH=/run/current-system/sw/share/icons,XCURSOR_THEME=GoogleDot-Black,XCURSOR_SIZE=24,QT_QUICK_BACKEND=software";
     theme = "material-you";
     extraPackages = with pkgs.kdePackages; [ qt5compat qtsvg qtdeclarative ];
   };
