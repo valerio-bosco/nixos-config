@@ -14,6 +14,8 @@
       ./terminale.nix      # kitty: trasparenza, font, colori del tema
       #./refind.nix         # schermata di avvio rEFInd (icone NixOS / Windows)
       ./refind-solo.nix
+      ./avvio.nix          # animazione di avvio (Plymouth) + login di serpantinum (SDDM)
+      ./aspetto.nix        # font Google Sans (e cursore)
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -208,7 +210,7 @@
         };
 
         theme = {
-          fontFamily = "Adwaita Mono";
+          fontFamily = "Google Sans";
           borderRadius = 12;
           matugen = true;
         };
@@ -224,8 +226,8 @@
     # Tema del cursore (uguale per Hyprland, app GTK, Qt e XWayland)
     home.pointerCursor = {
       enable = true;
-      package = pkgs.bibata-cursors;
-      name = "Bibata-Modern-Classic";
+      package = pkgs.google-cursor;
+      name = "GoogleDot-Black";
       size = 24;
       gtk.enable = true;
       x11.enable = true;

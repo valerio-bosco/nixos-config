@@ -24,9 +24,9 @@ hl.config({
 })
 
 -- Tema del cursore (installato da home.pointerCursor in configuration.nix)
-hl.env("XCURSOR_THEME", "Bibata-Modern-Classic")
+hl.env("XCURSOR_THEME", "GoogleDot-Black")
 hl.env("XCURSOR_SIZE", "24")
-hl.env("HYPRCURSOR_THEME", "Bibata-Modern-Classic")
+hl.env("HYPRCURSOR_THEME", "GoogleDot-Black")
 hl.env("HYPRCURSOR_SIZE", "24")
 
 -- Autostart: serpantinumd parte già come servizio systemd e easyeffects via home-manager,
