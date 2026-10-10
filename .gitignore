@@ -1,0 +1,16 @@
+# Copie di sicurezza fatte a mano durante le modifiche (la storia ora la tiene git)
+*.bak
+*.bak[0-9]*
+*.bak-*
+grub-theme.bak-16x9/
+
+# Bozza vecchia del flake, non usata
+flake2.nix
+
+# Non più usati dopo il passaggio a rEFInd da solo (refind-solo.nix)
+refind.nix
+grub-theme/
+
+# Link creati da nixos-rebuild build
+result
+result-*
