@@ -5,6 +5,7 @@
 #              Goose o un modello locale con Ollama
 #            → server MCP "desktop": finestre, workspace, screenshot, OCR, mouse, tastiera, appunti...
 #              Clic, tasti, chiusura finestre e appunti chiedono sempre conferma nel pannello.
+#   Telegram → @oring_bot: stessa conversazione dal telefono, permessi come pulsanti (/new /agent /stop /status)
 #
 # Ogni agente va autenticato una volta dal terminale: claude, codex login, opencode auth login,
 # goose configure.
@@ -38,6 +39,11 @@
           { id = "opencode"; name = "OpenCode"; type = "acp"; command = "opencode acp"; }
           { id = "goose"; name = "Goose"; type = "acp"; command = "goose acp"; }
           { id = "locale"; name = "Qwen (locale)"; type = "openai"; model = "qwen3:4b"; }
+        ];
+        # Telegram (@oring_bot): il token è in ~/.config/oring/telegram-token (privato, fuori da Nix);
+        # risponde solo alla chat di voodoo
+        gateways = [
+          { type = "telegram"; token_file = "~/.config/oring/telegram-token"; allowed_chats = [ 918280932 ]; }
         ];
       };
     };
