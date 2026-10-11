@@ -16,7 +16,7 @@
       ./refind-solo.nix
       ./avvio.nix          # animazione di avvio (Plymouth) + login di serpantinum (SDDM)
       ./aspetto.nix        # font Google Sans (e cursore)
-      ./assistente         # assistente Claude nel desktop (SUPER+I) + server MCP per Hyprland
+      ./oring.nix          # pannello degli agenti AI (SUPER+I) + server MCP del desktop
       ./remoto.nix         # accesso da remoto: Tailscale
     ];
 

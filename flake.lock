@@ -88,11 +88,29 @@
         "type": "github"
       }
     },
+    "oring": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1791717814,
+        "narHash": "sha256-QO2kWdPSqLkMwcoYd+Ba1t4XV23kq0UYPxNjuh/c8v0=",
+        "path": "/home/voodoo/Projects/oring",
+        "type": "path"
+      },
+      "original": {
+        "path": "/home/voodoo/Projects/oring",
+        "type": "path"
+      }
+    },
     "root": {
       "inputs": {
         "claude-code": "claude-code",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs_2",
+        "oring": "oring",
         "serpantinum": "serpantinum"
       }
     },

@@ -91,8 +91,8 @@ hl.config({
     },
 })
 
--- SUPER+I: pannello dell'assistente Claude (chat + azioni sul desktop tramite MCP)
-hl.bind("SUPER + I", hl.dsp.exec_cmd("assistente-toggle"))
+-- SUPER+I: pannello degli agenti AI, oring (chat + azioni sul desktop tramite MCP)
+hl.bind("SUPER + I", hl.dsp.exec_cmd("oring toggle"))
 
 -- Scala dello schermo: 1.0666667 (= 128/120). Con 3440x1440 è l'unico valore tra 1 e 1.25 che
 -- Hyprland accetta (la scala deve essere un multiplo di 1/120 e dividere la risoluzione in interi).

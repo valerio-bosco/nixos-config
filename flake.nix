@@ -9,6 +9,13 @@
     };
 
     claude-code.url = "github:sadjow/claude-code-nix";
+
+    # Pannello degli agenti per serpantinum: progetto locale (quando sarà su GitHub:
+    # url = "github:valerio-bosco/oring"). Dopo ogni modifica al progetto: nix flake update oring
+    oring = {
+      url = "path:/home/voodoo/Projects/oring";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = inputs: {
