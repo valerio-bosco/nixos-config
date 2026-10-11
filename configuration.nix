@@ -222,6 +222,12 @@
           position = "top right";
           sound = true;
         };
+
+        # Niente sospensione automatica (scelta voluta): l'11/10/2026 una volta non si è risvegliato,
+        # e al risveglio NVIDIA 580 + S3 "deep" dà errori (USB reinizializzato, "Flip event timeout").
+        # Restano oscuramento, blocco e spegnimento dello schermo.
+        # NB: il modulo scrive ~/.config/serpantinum/settings.json solo se non esiste: lì va cambiato a mano.
+        idle.actions.suspend.enabled = false;
       };
     };
 
