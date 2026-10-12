@@ -12,6 +12,13 @@
 { pkgs, inputs, ... }:
 
 {
+  # Livello di accesso (sandbox / full): file di root in /var/lib/oring, si cambia solo al PC con
+  #   oring admin full      (password di amministratore chiesta da polkit, solo nella sessione locale)
+  #   oring admin sandbox   (di nuovo con la sandbox)      oring admin   (mostra il livello)
+  # In "sandbox" da Telegram si usano solo agenti in sandbox (Claude); in "full" tutti, e Claude senza sandbox.
+  imports = [ inputs.oring.nixosModules.default ];
+  programs.oring.admin.enable = true;
+
   home-manager.users.voodoo = {
     imports = [ inputs.oring.homeManagerModules.default ];
 
@@ -43,7 +50,7 @@
         # Telegram (@oring_bot): il token è in ~/.config/oring/telegram-token (privato, fuori da Nix);
         # risponde solo alla chat di voodoo
         gateways = [
-          { type = "telegram"; token_file = "~/.config/oring/telegram-token"; allowed_chats = [ 918280932 ]; }
+          { type = "telegram"; token_file = "~/.config/oring/telegram-token"; allowed_chats = [ 918280932 ]; progress = false; }
         ];
       };
     };
